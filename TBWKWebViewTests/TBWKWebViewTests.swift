@@ -24,6 +24,14 @@ class TBWKWebViewTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let webView = TBWKWebView()
+        let ex = expectation(description: "Expects completion handler to be called")
+        webView.load(URLRequest(url: URL(string: "https://www.google.com")!)) {
+            ex.fulfill()
+        };
+        waitForExpectations(timeout: 10) { (error) in
+            print("Expectation error \(error)")
+        }
     }
     
     func testPerformanceExample() {

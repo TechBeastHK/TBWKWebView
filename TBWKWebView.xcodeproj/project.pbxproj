@@ -10,10 +10,25 @@
 		569A9FAF1E55F1EE006C6D16 /* TBWKWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 569A9FA51E55F1EE006C6D16 /* TBWKWebView.framework */; };
 		569A9FB41E55F1EE006C6D16 /* TBWKWebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569A9FB31E55F1EE006C6D16 /* TBWKWebViewTests.swift */; };
 		569A9FB61E55F1EE006C6D16 /* TBWKWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 569A9FA81E55F1EE006C6D16 /* TBWKWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		569A9FC01E55F260006C6D16 /* TBWKWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569A9FBF1E55F260006C6D16 /* TBWKWebView.swift */; };
+		569A9FC81E5600C3006C6D16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569A9FC71E5600C3006C6D16 /* AppDelegate.swift */; };
+		569A9FCA1E5600C3006C6D16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569A9FC91E5600C3006C6D16 /* ViewController.swift */; };
+		569A9FCD1E5600C3006C6D16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 569A9FCB1E5600C3006C6D16 /* Main.storyboard */; };
+		569A9FCF1E5600C3006C6D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 569A9FCE1E5600C3006C6D16 /* Assets.xcassets */; };
+		569A9FD21E5600C3006C6D16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 569A9FD01E5600C3006C6D16 /* LaunchScreen.storyboard */; };
+		569A9FD71E5601C7006C6D16 /* TBWKWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 569A9FA51E55F1EE006C6D16 /* TBWKWebView.framework */; };
+		569A9FDA1E573C85006C6D16 /* TBWKWebView.swift in Headers */ = {isa = PBXBuildFile; fileRef = 569A9FBF1E55F260006C6D16 /* TBWKWebView.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		569A9FB01E55F1EE006C6D16 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 569A9F9C1E55F1ED006C6D16 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 569A9FA41E55F1ED006C6D16;
+			remoteInfo = TBWKWebView;
+		};
+		569A9FD81E573C72006C6D16 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 569A9F9C1E55F1ED006C6D16 /* Project object */;
 			proxyType = 1;
@@ -29,6 +44,14 @@
 		569A9FAE1E55F1EE006C6D16 /* TBWKWebViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TBWKWebViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		569A9FB31E55F1EE006C6D16 /* TBWKWebViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TBWKWebViewTests.swift; sourceTree = "<group>"; };
 		569A9FB51E55F1EE006C6D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		569A9FBF1E55F260006C6D16 /* TBWKWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBWKWebView.swift; sourceTree = "<group>"; };
+		569A9FC51E5600C3006C6D16 /* TBWKWebViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TBWKWebViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		569A9FC71E5600C3006C6D16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		569A9FC91E5600C3006C6D16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		569A9FCC1E5600C3006C6D16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		569A9FCE1E5600C3006C6D16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		569A9FD11E5600C3006C6D16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		569A9FD31E5600C3006C6D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +70,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		569A9FC21E5600C3006C6D16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				569A9FD71E5601C7006C6D16 /* TBWKWebView.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -55,6 +86,7 @@
 			children = (
 				569A9FA71E55F1EE006C6D16 /* TBWKWebView */,
 				569A9FB21E55F1EE006C6D16 /* TBWKWebViewTests */,
+				569A9FC61E5600C3006C6D16 /* TBWKWebViewDemo */,
 				569A9FA61E55F1EE006C6D16 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +96,7 @@
 			children = (
 				569A9FA51E55F1EE006C6D16 /* TBWKWebView.framework */,
 				569A9FAE1E55F1EE006C6D16 /* TBWKWebViewTests.xctest */,
+				569A9FC51E5600C3006C6D16 /* TBWKWebViewDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				569A9FA81E55F1EE006C6D16 /* TBWKWebView.h */,
+				569A9FBF1E55F260006C6D16 /* TBWKWebView.swift */,
 				569A9FA91E55F1EE006C6D16 /* Info.plist */,
 			);
 			path = TBWKWebView;
@@ -86,6 +120,19 @@
 			path = TBWKWebViewTests;
 			sourceTree = "<group>";
 		};
+		569A9FC61E5600C3006C6D16 /* TBWKWebViewDemo */ = {
+			isa = PBXGroup;
+			children = (
+				569A9FC71E5600C3006C6D16 /* AppDelegate.swift */,
+				569A9FC91E5600C3006C6D16 /* ViewController.swift */,
+				569A9FCB1E5600C3006C6D16 /* Main.storyboard */,
+				569A9FCE1E5600C3006C6D16 /* Assets.xcassets */,
+				569A9FD01E5600C3006C6D16 /* LaunchScreen.storyboard */,
+				569A9FD31E5600C3006C6D16 /* Info.plist */,
+			);
+			path = TBWKWebViewDemo;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -94,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				569A9FB61E55F1EE006C6D16 /* TBWKWebView.h in Headers */,
+				569A9FDA1E573C85006C6D16 /* TBWKWebView.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,6 +184,24 @@
 			productReference = 569A9FAE1E55F1EE006C6D16 /* TBWKWebViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		569A9FC41E5600C3006C6D16 /* TBWKWebViewDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 569A9FD41E5600C3006C6D16 /* Build configuration list for PBXNativeTarget "TBWKWebViewDemo" */;
+			buildPhases = (
+				569A9FC11E5600C3006C6D16 /* Sources */,
+				569A9FC21E5600C3006C6D16 /* Frameworks */,
+				569A9FC31E5600C3006C6D16 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				569A9FD91E573C72006C6D16 /* PBXTargetDependency */,
+			);
+			name = TBWKWebViewDemo;
+			productName = TBWKWebViewDemo;
+			productReference = 569A9FC51E5600C3006C6D16 /* TBWKWebViewDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -148,9 +214,14 @@
 				TargetAttributes = {
 					569A9FA41E55F1ED006C6D16 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					569A9FAD1E55F1EE006C6D16 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+					569A9FC41E5600C3006C6D16 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -162,6 +233,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 569A9F9B1E55F1ED006C6D16;
 			productRefGroup = 569A9FA61E55F1EE006C6D16 /* Products */;
@@ -170,6 +242,7 @@
 			targets = (
 				569A9FA41E55F1ED006C6D16 /* TBWKWebView */,
 				569A9FAD1E55F1EE006C6D16 /* TBWKWebViewTests */,
+				569A9FC41E5600C3006C6D16 /* TBWKWebViewDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -189,6 +262,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		569A9FC31E5600C3006C6D16 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				569A9FD21E5600C3006C6D16 /* LaunchScreen.storyboard in Resources */,
+				569A9FCF1E5600C3006C6D16 /* Assets.xcassets in Resources */,
+				569A9FCD1E5600C3006C6D16 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -196,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				569A9FC01E55F260006C6D16 /* TBWKWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +291,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		569A9FC11E5600C3006C6D16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				569A9FCA1E5600C3006C6D16 /* ViewController.swift in Sources */,
+				569A9FC81E5600C3006C6D16 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -215,7 +308,31 @@
 			target = 569A9FA41E55F1ED006C6D16 /* TBWKWebView */;
 			targetProxy = 569A9FB01E55F1EE006C6D16 /* PBXContainerItemProxy */;
 		};
+		569A9FD91E573C72006C6D16 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 569A9FA41E55F1ED006C6D16 /* TBWKWebView */;
+			targetProxy = 569A9FD81E573C72006C6D16 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		569A9FCB1E5600C3006C6D16 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				569A9FCC1E5600C3006C6D16 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		569A9FD01E5600C3006C6D16 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				569A9FD11E5600C3006C6D16 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		569A9FB71E55F1EE006C6D16 /* Debug */ = {
@@ -320,6 +437,7 @@
 		569A9FBA1E55F1EE006C6D16 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -331,6 +449,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.techbeast.TBWKWebView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -338,6 +457,7 @@
 		569A9FBB1E55F1EE006C6D16 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -356,6 +476,7 @@
 		569A9FBD1E55F1EE006C6D16 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = TBWKWebViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.techbeast.TBWKWebViewTests;
@@ -367,9 +488,34 @@
 		569A9FBE1E55F1EE006C6D16 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = TBWKWebViewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.techbeast.TBWKWebViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		569A9FD51E5600C3006C6D16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TBWKWebViewDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.techbeast.TBWKWebViewDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		569A9FD61E5600C3006C6D16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TBWKWebViewDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.techbeast.TBWKWebViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -400,6 +546,14 @@
 			buildConfigurations = (
 				569A9FBD1E55F1EE006C6D16 /* Debug */,
 				569A9FBE1E55F1EE006C6D16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		569A9FD41E5600C3006C6D16 /* Build configuration list for PBXNativeTarget "TBWKWebViewDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				569A9FD51E5600C3006C6D16 /* Debug */,
+				569A9FD61E5600C3006C6D16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
