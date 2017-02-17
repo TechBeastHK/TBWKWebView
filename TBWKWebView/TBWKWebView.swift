@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-public typealias TBWKWebViewLoadCompletionBlock = (Void)->(TBWKWebViewCompletionType)
+public typealias TBWKWebViewLoadCompletionBlock = (WKNavigation, Error?) -> (TBWKWebViewCompletionType)
 
 public enum TBWKWebViewCompletionType {
     case complete
@@ -70,14 +70,23 @@ open class TBWKWebView: WKWebView {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self._webView(webView, didFail: navigation, withError: nil)
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        self._webView(webView, didFail: navigation, withError: error)
+    }
+
+    func _webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error?) {
         let (_, block) = completionBlocks.first!
-        let ret = block?()
+        let ret = block?(navigation, error)
 
         if ret == nil || ret! == .complete {
             completionBlocks.removeFirst()
             self.attemptFlush()
         }
     }
+
 }
 
 class TBWKNavigationDelegate: NSObject, WKNavigationDelegate {
@@ -91,6 +100,16 @@ class TBWKNavigationDelegate: NSObject, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.webView?.externalNavigationDelegate?.webView?(webView, didFinish: navigation)
         self.webView?.webView(webView, didFinish: navigation)
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        self.webView?.externalNavigationDelegate?.webView?(webView, didFail: navigation, withError: error)
+        self.webView?.webView(webView, didFail: navigation, withError: error)
+    }
+
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        self.webView?.externalNavigationDelegate?.webView?(webView, didFailProvisionalNavigation: navigation, withError: error)
+        self.webView?.webView(webView, didFail: navigation, withError: error) // Treat it the same way as didFail
     }
 
     override func forwardingTarget(for aSelector: Selector!) -> Any? {
