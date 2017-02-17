@@ -31,12 +31,12 @@ open class TBWKWebView: WKWebView {
         self.navigationDelegate = nil // setup internalNavigationDelegate
     }
 
-    lazy var internalNavigationDelegate: TBWKNavigationDelegate = {
+    lazy private var internalNavigationDelegate: TBWKNavigationDelegate = {
         [unowned self] in
         return TBWKNavigationDelegate(webView: self)
     }()
 
-    weak var externalNavigationDelegate: WKNavigationDelegate?
+    weak fileprivate var externalNavigationDelegate: WKNavigationDelegate?
     override weak open var navigationDelegate: WKNavigationDelegate? {
         set {
             self.externalNavigationDelegate = newValue
@@ -61,7 +61,7 @@ open class TBWKWebView: WKWebView {
         self.attemptFlush()
     }
 
-    func attemptFlush() {
+    private func attemptFlush() {
         guard completionBlocks.count > 0 else { return }
         if !self.isLoading {
             let (request, _) = completionBlocks.first!
@@ -69,15 +69,15 @@ open class TBWKWebView: WKWebView {
         }
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    fileprivate func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self._webView(webView, didFail: navigation, withError: nil)
     }
 
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    fileprivate func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self._webView(webView, didFail: navigation, withError: error)
     }
 
-    func _webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error?) {
+    private func _webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error?) {
         let (_, block) = completionBlocks.first!
         let ret = block?(navigation, error)
 
@@ -89,7 +89,7 @@ open class TBWKWebView: WKWebView {
 
 }
 
-class TBWKNavigationDelegate: NSObject, WKNavigationDelegate {
+fileprivate class TBWKNavigationDelegate: NSObject, WKNavigationDelegate {
     weak var webView: TBWKWebView?
     
     init(webView: TBWKWebView) {
