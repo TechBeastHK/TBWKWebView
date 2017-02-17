@@ -1,5 +1,5 @@
 # TBWKWebView
-WKWebView with completion block callback
+TBWKWebView is a WKWebView subclass which supports a completion block callback, enqueuing multiple URLRequest and executing them one by one. This is particularly useful for implementing crawler-like functionality from within an iOS app.
 
 # Installation
 Copy `TBWKWebView.swift` to your project, or use the entire `TBWKWebView.framework`.
