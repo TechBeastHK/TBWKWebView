@@ -12,11 +12,11 @@ import WebKit
 public typealias TBWKWebViewLoadCompletionBlock = (Void)->(TBWKWebViewCompletionType)
 
 public enum TBWKWebViewCompletionType {
-    case Complete
+    case complete
 
     // Indicates that the loaded webpage may have additional JS that would lead to another navigation
     // And that the same completion handler should be called again in the next finish loading.
-    case Incomplete
+    case incomplete
 }
 
 open class TBWKWebView: WKWebView {
@@ -73,8 +73,9 @@ open class TBWKWebView: WKWebView {
         let (_, block) = completionBlocks.first!
         let ret = block?()
 
-        if ret == nil || ret! == .Complete {
+        if ret == nil || ret! == .complete {
             completionBlocks.removeFirst()
+            self.attemptFlush()
         }
     }
 }

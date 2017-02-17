@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		568B7C421E576026001EC5CC /* redirectTest.html in Resources */ = {isa = PBXBuildFile; fileRef = 568B7C411E576026001EC5CC /* redirectTest.html */; };
 		569A9FAF1E55F1EE006C6D16 /* TBWKWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 569A9FA51E55F1EE006C6D16 /* TBWKWebView.framework */; };
 		569A9FB41E55F1EE006C6D16 /* TBWKWebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569A9FB31E55F1EE006C6D16 /* TBWKWebViewTests.swift */; };
 		569A9FB61E55F1EE006C6D16 /* TBWKWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 569A9FA81E55F1EE006C6D16 /* TBWKWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		568B7C411E576026001EC5CC /* redirectTest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = redirectTest.html; sourceTree = "<group>"; };
 		569A9FA51E55F1EE006C6D16 /* TBWKWebView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TBWKWebView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		569A9FA81E55F1EE006C6D16 /* TBWKWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBWKWebView.h; sourceTree = "<group>"; };
 		569A9FA91E55F1EE006C6D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				569A9FB31E55F1EE006C6D16 /* TBWKWebViewTests.swift */,
+				568B7C411E576026001EC5CC /* redirectTest.html */,
 				569A9FB51E55F1EE006C6D16 /* Info.plist */,
 			);
 			path = TBWKWebViewTests;
@@ -259,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568B7C421E576026001EC5CC /* redirectTest.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +544,7 @@
 				569A9FBB1E55F1EE006C6D16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		569A9FBC1E55F1EE006C6D16 /* Build configuration list for PBXNativeTarget "TBWKWebViewTests" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +553,7 @@
 				569A9FBE1E55F1EE006C6D16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		569A9FD41E5600C3006C6D16 /* Build configuration list for PBXNativeTarget "TBWKWebViewDemo" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +562,7 @@
 				569A9FD61E5600C3006C6D16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
