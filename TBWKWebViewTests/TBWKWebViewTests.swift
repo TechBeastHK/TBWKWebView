@@ -7,13 +7,17 @@
 //
 
 import XCTest
+import WebKit
 @testable import TBWKWebView
 
-class TBWKWebViewTests: XCTestCase {
-    
+class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
+    var webView: TBWKWebView!
+    var ex: XCTestExpectation!
+
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+
+        self.webView = TBWKWebView()
     }
     
     override func tearDown() {
@@ -21,19 +25,32 @@ class TBWKWebViewTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        let webView = TBWKWebView()
-        let ex = expectation(description: "Expects completion handler to be called")
-        webView.load(URLRequest(url: URL(string: "https://www.google.com")!)) {
-            ex.fulfill()
+    func testEnqueue() {
+        self.ex = expectation(description: "")
+        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!)) {
+            self.ex.fulfill()
+            return .Complete
         };
         waitForExpectations(timeout: 10) { (error) in
-            print("Expectation error \(error)")
+            XCTAssertNil(error, "Error: \(error)")
+            XCTAssertEqual(0, self.webView.pendingRequests.count, "Pending requests not equal to zero: \(self.webView.pendingRequests.count)")
         }
     }
-    
+
+    func testEnqueueWithDelegate() {
+        self.ex = expectation(description: "")
+
+        self.webView.navigationDelegate = self
+        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!), completionHandler:nil)
+        waitForExpectations(timeout: 10) { (error) in
+            XCTAssertNil(error, "Error: \(error)")
+            XCTAssertEqual(0, self.webView.pendingRequests.count, "Pending requests not equal to zero: \(self.webView.pendingRequests.count)")
+        }
+    }
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.ex.fulfill()
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

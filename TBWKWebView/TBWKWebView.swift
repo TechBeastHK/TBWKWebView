@@ -9,11 +9,18 @@
 import UIKit
 import WebKit
 
+public typealias TBWKWebViewLoadCompletionBlock = (Void)->(TBWKWebViewCompletionType)
+
+public enum TBWKWebViewCompletionType {
+    case Complete
+
+    // Indicates that the loaded webpage may have additional JS that would lead to another navigation
+    // And that the same completion handler should be called again in the next finish loading.
+    case Incomplete
+}
+
 open class TBWKWebView: WKWebView {
-//    override public required init(frame: CGRect, configuration: WKWebViewConfiguration) {
-//        self.navigationDelegate = nil // setup internalNavigationDelegate
-//        super.init(frame: frame, configuration: configuration)
-//    }
+
     override public init(frame: CGRect, configuration: WKWebViewConfiguration) {
         super.init(frame: frame, configuration: configuration)
         self.navigationDelegate = nil // setup internalNavigationDelegate
@@ -39,15 +46,21 @@ open class TBWKWebView: WKWebView {
             return self.externalNavigationDelegate
         }
     }
-    
-    var completionBlocks = [(URLRequest, (Void)->(Void))]()
-    var currentNavigation: WKNavigation?
 
-    open func load(_ request: URLRequest, completionHandler: @escaping (Void) -> (Void)) {
+    open var pendingRequests: [URLRequest] {
+        get {
+            return self.completionBlocks.map { $0.0 }
+        }
+    }
+
+    private var completionBlocks = [(URLRequest, TBWKWebViewLoadCompletionBlock?)]()
+    private var currentNavigation: WKNavigation?
+
+    open func enqueue(_ request: URLRequest, completionHandler: TBWKWebViewLoadCompletionBlock?) {
         completionBlocks.append((request, completionHandler))
         self.attemptFlush()
     }
-    
+
     func attemptFlush() {
         guard completionBlocks.count > 0 else { return }
         if !self.isLoading {
@@ -58,7 +71,11 @@ open class TBWKWebView: WKWebView {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         let (_, block) = completionBlocks.first!
-        block()
+        let ret = block?()
+
+        if ret == nil || ret! == .Complete {
+            completionBlocks.removeFirst()
+        }
     }
 }
 
@@ -74,6 +91,7 @@ class TBWKNavigationDelegate: NSObject, WKNavigationDelegate {
         self.webView?.externalNavigationDelegate?.webView?(webView, didFinish: navigation)
         self.webView?.webView(webView, didFinish: navigation)
     }
+
     override func forwardingTarget(for aSelector: Selector!) -> Any? {
         // Forwards everything else to the external delegate.
         return self.webView?.externalNavigationDelegate

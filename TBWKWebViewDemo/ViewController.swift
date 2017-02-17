@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         webView.frame = CGRect(x: 20, y: 20, width: 200, height: 500)
         self.view.addSubview(webView)
 
-        let request = URLRequest(url: URL(string: "https://www.google.com")!)
+        let request = URLRequest(url: URL(string: "https://jigsaw.w3.org/HTTP/300/301.html")!)
         webView.load(request) { (Void) -> (Void) in
             print("loaded! %@", webView.url!)
         }
