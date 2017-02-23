@@ -78,12 +78,13 @@ open class TBWKWebView: WKWebView {
     }
 
     private func _webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error?) {
-        let (_, block) = completionBlocks.first!
-        let ret = block?(navigation, error)
+        if let (_, block) = completionBlocks.first {
+            let ret = block?(navigation, error)
 
-        if ret == nil || ret! == .complete {
-            completionBlocks.removeFirst()
-            self.attemptFlush()
+            if ret == nil || ret! == .complete {
+                completionBlocks.removeFirst()
+                self.attemptFlush()
+            }
         }
     }
 
