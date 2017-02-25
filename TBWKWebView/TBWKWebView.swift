@@ -56,7 +56,7 @@ open class TBWKWebView: WKWebView {
     private var completionBlocks = [(URLRequest, TBWKWebViewLoadCompletionBlock?)]()
     private var currentNavigation: WKNavigation?
 
-    open func enqueue(_ request: URLRequest, completionHandler: TBWKWebViewLoadCompletionBlock?) {
+    open func enqueue(_ request: URLRequest, completionHandler: TBWKWebViewLoadCompletionBlock? = nil) {
         completionBlocks.append((request, completionHandler))
         self.attemptFlush()
     }
@@ -70,14 +70,14 @@ open class TBWKWebView: WKWebView {
     }
     
     fileprivate func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self._webView(webView, didFail: navigation, withError: nil)
+        self._webView(webView, didFail: navigation)
     }
 
     fileprivate func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self._webView(webView, didFail: navigation, withError: error)
     }
 
-    private func _webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error?) {
+    private func _webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error? = nil) {
         if let (_, block) = completionBlocks.first {
             let ret = block?(navigation, error)
 
@@ -88,6 +88,9 @@ open class TBWKWebView: WKWebView {
         }
     }
 
+    deinit {
+        print("deinit TBWKWebView: \(self)")
+    }
 }
 
 fileprivate class TBWKNavigationDelegate: NSObject, WKNavigationDelegate {

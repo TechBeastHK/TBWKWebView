@@ -42,7 +42,7 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
         self.ex = expectation(description: "")
 
         self.webView.navigationDelegate = self
-        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!), completionHandler: nil)
+        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!))
         waitForExpectations(timeout: 10) { (error) in
             XCTAssertNil(error, "Error: \(error)")
         }
