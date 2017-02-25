@@ -117,4 +117,10 @@ fileprivate class TBWKNavigationDelegate: NSObject, WKNavigationDelegate {
         // Forwards everything else to the external delegate.
         return self.webView?.externalNavigationDelegate
     }
+
+    override func responds(to aSelector: Selector!) -> Bool {
+        // Tells WKWebView to call our delegate methods as if we have implemented it
+        let myRet = super.responds(to: aSelector)
+        return myRet ? myRet : self.webView?.externalNavigationDelegate?.responds(to: aSelector) ?? false
+    }
 }

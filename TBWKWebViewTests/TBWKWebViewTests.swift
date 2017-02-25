@@ -29,6 +29,7 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
     func testEnqueue() {
         self.ex = expectation(description: "")
         self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!)) { (navigation, error) in
+            XCTAssertNil(error, "Unexpected navigation error")
             self.ex.fulfill()
             return .complete
         };
@@ -41,14 +42,20 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
         self.ex = expectation(description: "")
 
         self.webView.navigationDelegate = self
-        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!), completionHandler:nil)
+        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!), completionHandler: nil)
         waitForExpectations(timeout: 10) { (error) in
             XCTAssertNil(error, "Error: \(error)")
         }
     }
+    // Test that internally implemented delegate calls get forwarded to the external delegate
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.ex.fulfill()
     }
+    // Test that internally unimplemented delegate calls get forwarded to the external delegate
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        decisionHandler(.allow)
+    }
+
 
     func testLocalFile() {
         self.ex = expectation(description: "")
