@@ -24,7 +24,7 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
         self.webView = TBWKWebView(frame: CGRect.zero, configuration: conf)
 
         NotificationCenter.default.addObserver(forName: TBWKWebView.DidSpawnWebViewNotification, object: nil, queue: nil) { (notification) in
-            self.webView = notification.userInfo!["spawnedWebView"]! as! TBWKWebView
+            self.webView = notification.userInfo![TBWKWebView.NewlySpawnedWebViewKey]! as! TBWKWebView
         }
     }
     

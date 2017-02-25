@@ -21,8 +21,9 @@ public enum TBWKWebViewCompletionType {
 
 open class TBWKWebView: WKWebView {
 
-    public static let DidSpawnWebViewNotification = Notification.Name("TBWKWebViewDidSpawnWebViewNotification")
-    public static let DidDeinitWebViewNotification = Notification.Name("TBWKWebViewDidDeinitWebViewNotification")
+    public static let DidSpawnWebViewNotification = Notification.Name("TBWKWebView.DidSpawnWebViewNotification")
+    public static let DidDeinitWebViewNotification = Notification.Name("TBWKWebView.DidDeinitWebViewNotification")
+    public static let NewlySpawnedWebViewKey = "TBWKWebView.NewlySpawnedWebViewKey"
 
     override public init(frame: CGRect, configuration: WKWebViewConfiguration) {
         super.init(frame: frame, configuration: configuration)
@@ -48,7 +49,7 @@ open class TBWKWebView: WKWebView {
     }
 
     // When this is true, your app should listen for TBWKWebView.DidSpawnWebViewNotification in NotificationCenter.default
-    // to hold onto the newly spawned web view (in notification.userInfo["spawnedWebView"]),
+    // to hold onto the newly spawned web view (in notification.userInfo[TBWKWebView.NewlySpawnedWebViewKey]),
     // such as storing it in a strong variable, or displaying it (views are strongly held).
     // Very often, your original webView is no longer useful and you can set your original holding variable
     // to the new webView, effectively deallocating the original webView.
@@ -139,7 +140,7 @@ open class TBWKWebView: WKWebView {
             return externalWebView
         }
 
-        NotificationCenter.default.post(Notification(name: TBWKWebView.DidSpawnWebViewNotification, object: self, userInfo: ["spawnedWebView": ewv]))
+        NotificationCenter.default.post(Notification(name: TBWKWebView.DidSpawnWebViewNotification, object: self, userInfo: [TBWKWebView.NewlySpawnedWebViewKey: ewv]))
 
         return ewv
     }
