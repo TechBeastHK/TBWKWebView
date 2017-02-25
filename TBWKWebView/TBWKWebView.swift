@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-public typealias TBWKWebViewLoadCompletionBlock = (TBWKWebView, WKNavigation, Error?) -> (TBWKWebViewCompletionType)
+public typealias TBWKWebViewLoadCompletionBlock = (TBWKWebView, WKNavigation?, Error?) -> (TBWKWebViewCompletionType)
 
 public enum TBWKWebViewCompletionType {
     case complete
@@ -89,25 +89,33 @@ open class TBWKWebView: WKWebView {
         }
     }
 
-    open var pendingRequests: [URLRequest] {
-        get {
-            return self.completionBlocks.map { $0.0 }
-        }
-    }
-
-    private var completionBlocks = [(URLRequest, TBWKWebViewLoadCompletionBlock?)]()
+    open private(set) var completionBlocks = [(URLRequest?, TBWKWebViewLoadCompletionBlock?)]()
     private var currentNavigation: WKNavigation?
+    private var currentExecutingBlock: TBWKWebViewLoadCompletionBlock?
 
     open func enqueue(_ request: URLRequest, completionHandler: TBWKWebViewLoadCompletionBlock? = nil) {
         completionBlocks.append((request, completionHandler))
         self.attemptFlush()
     }
 
+    open func enqueue(block: @escaping (Void)->(Void)) {
+        completionBlocks.append((nil, { (webView, navigation, error) in
+            block()
+            return .complete
+        }))
+        self.attemptFlush()
+    }
+
     private func attemptFlush() {
         guard completionBlocks.count > 0 else { return }
-        if !self.isLoading {
+        if !self.isLoading && self.currentExecutingBlock == nil {
             let (request, _) = completionBlocks.first!
-            self.currentNavigation = self.load(request)
+            if let request = request {
+                self.currentNavigation = self.load(request)
+            } else {
+                self.currentNavigation = nil
+                self._webView(self, didNavigate: nil)
+            }
         }
     }
     
@@ -121,7 +129,9 @@ open class TBWKWebView: WKWebView {
 
     private func _webView(_ webView: WKWebView, didNavigate navigation: WKNavigation!, withError error: Error? = nil) {
         if let (_, block) = completionBlocks.first {
+            self.currentExecutingBlock = block
             let ret = block?(self, navigation, error)
+            self.currentExecutingBlock = nil
 
             if ret == nil || ret! == .complete {
                 completionBlocks.removeFirst()

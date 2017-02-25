@@ -31,7 +31,7 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
-        XCTAssertEqual(0, self.webView.pendingRequests.count, "Pending requests not equal to zero: \(self.webView.pendingRequests.count)")
+        XCTAssertEqual(0, self.webView.completionBlocks.count, "Pending completionBlocks not equal to zero: \(self.webView.completionBlocks.count)")
     }
     
     func testEnqueue() {
@@ -62,6 +62,23 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
     // Test that internally unimplemented delegate calls get forwarded to the external delegate
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         decisionHandler(.allow)
+    }
+
+    func testEnqueueBlock() {
+        self.ex = expectation(description: "")
+        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!)) { (webView, navigation, error) in
+            XCTAssertNil(error, "Unexpected navigation error")
+            return .complete
+        };
+        self.webView.enqueue {
+            self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com.hk")!), completionHandler: { (webView, navigation, error) -> (TBWKWebViewCompletionType) in
+                self.ex.fulfill()
+                return .complete
+            })
+        }
+        waitForExpectations(timeout: 10) { (error) in
+            XCTAssertNil(error, "Error: \(error)")
+        }
     }
 
 
