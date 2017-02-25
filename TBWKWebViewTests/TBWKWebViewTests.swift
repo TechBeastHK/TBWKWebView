@@ -17,7 +17,15 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
     override func setUp() {
         super.setUp()
 
-        self.webView = TBWKWebView()
+        let pref = WKPreferences()
+        pref.javaScriptCanOpenWindowsAutomatically = true
+        let conf = WKWebViewConfiguration()
+        conf.preferences = pref
+        self.webView = TBWKWebView(frame: CGRect.zero, configuration: conf)
+
+        NotificationCenter.default.addObserver(forName: TBWKWebView.DidSpawnWebViewNotification, object: nil, queue: nil) { (notification) in
+            self.webView = notification.userInfo!["spawnedWebView"]! as! TBWKWebView
+        }
     }
     
     override func tearDown() {
@@ -28,7 +36,7 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
     
     func testEnqueue() {
         self.ex = expectation(description: "")
-        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!)) { (navigation, error) in
+        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!)) { (webView, navigation, error) in
             XCTAssertNil(error, "Unexpected navigation error")
             self.ex.fulfill()
             return .complete
@@ -61,8 +69,8 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
         self.ex = expectation(description: "")
 
         let url = Bundle(for: TBWKWebViewTests.self).url(forResource: "redirectTest", withExtension: "html")
-        self.webView.enqueue(URLRequest(url: url!)) { (navigation, error) in
-            if let hasGoogle = self.webView.url?.host?.contains("google.com"), hasGoogle {
+        self.webView.enqueue(URLRequest(url: url!)) { (webView, navigation, error) in
+            if self.webView.url?.host?.contains("google.com") ?? false {
                 self.ex.fulfill()
                 return .complete
             } else {
@@ -77,11 +85,11 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
     func testConsecutiveEnqueue() {
         self.ex = expectation(description: "")
         var i = 0
-        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!)) { (navigation, error) in
+        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!)) { (webView, navigation, error) in
             i += 1
             return .complete
         }
-        self.webView.enqueue(URLRequest(url: URL(string: "https://www.yahoo.com")!)) { (navigation, error) in
+        self.webView.enqueue(URLRequest(url: URL(string: "https://www.yahoo.com")!)) { (webView, navigation, error) in
             XCTAssertEqual(1, i, "Google.com not loaded before Yahoo.com")
             self.ex.fulfill()
             return .complete
@@ -93,10 +101,28 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
 
     func testFail() {
         self.ex = expectation(description: "")
-        self.webView.enqueue(URLRequest(url: URL(string: "https://www.veryverybaddomain.doesnotexistcom")!)) { (navigation, error) in
+        self.webView.enqueue(URLRequest(url: URL(string: "https://www.veryverybaddomain.doesnotexistcom")!)) { (webView, navigation, error) in
             XCTAssertNotNil(error, "Expected domain resolve error")
             self.ex.fulfill()
             return .complete
+        }
+        waitForExpectations(timeout: 10) { (error) in
+            XCTAssertNil(error, "Error: \(error)")
+        }
+    }
+
+    func testOpenWindow() {
+        self.ex = expectation(description: "")
+        let url = Bundle(for: TBWKWebViewTests.self).url(forResource: "openInNewWindowTest", withExtension: "html")!
+        self.webView.performCallbackAcrossNewlyOpenedWebView = true
+        self.webView.enqueue(URLRequest(url: url)) { (webView, navigation, error) in
+            if webView.url!.absoluteString.contains("google.com") {
+                self.ex.fulfill()
+                return .complete
+            }
+            else {
+                return .incomplete
+            }
         }
         waitForExpectations(timeout: 10) { (error) in
             XCTAssertNil(error, "Error: \(error)")

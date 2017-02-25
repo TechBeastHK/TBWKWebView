@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		568B7C421E576026001EC5CC /* redirectTest.html in Resources */ = {isa = PBXBuildFile; fileRef = 568B7C411E576026001EC5CC /* redirectTest.html */; };
+		568B7CD61E618619001EC5CC /* openInNewWindowTest.html in Resources */ = {isa = PBXBuildFile; fileRef = 568B7CD51E618619001EC5CC /* openInNewWindowTest.html */; };
 		569A9FAF1E55F1EE006C6D16 /* TBWKWebView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 569A9FA51E55F1EE006C6D16 /* TBWKWebView.framework */; };
 		569A9FB41E55F1EE006C6D16 /* TBWKWebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569A9FB31E55F1EE006C6D16 /* TBWKWebViewTests.swift */; };
 		569A9FB61E55F1EE006C6D16 /* TBWKWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 569A9FA81E55F1EE006C6D16 /* TBWKWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		568B7C411E576026001EC5CC /* redirectTest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = redirectTest.html; sourceTree = "<group>"; };
+		568B7CD51E618619001EC5CC /* openInNewWindowTest.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = openInNewWindowTest.html; sourceTree = "<group>"; };
 		569A9FA51E55F1EE006C6D16 /* TBWKWebView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TBWKWebView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		569A9FA81E55F1EE006C6D16 /* TBWKWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TBWKWebView.h; sourceTree = "<group>"; };
 		569A9FA91E55F1EE006C6D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				569A9FB31E55F1EE006C6D16 /* TBWKWebViewTests.swift */,
 				568B7C411E576026001EC5CC /* redirectTest.html */,
+				568B7CD51E618619001EC5CC /* openInNewWindowTest.html */,
 				569A9FB51E55F1EE006C6D16 /* Info.plist */,
 			);
 			path = TBWKWebViewTests;
@@ -262,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568B7CD61E618619001EC5CC /* openInNewWindowTest.html in Resources */,
 				568B7C421E576026001EC5CC /* redirectTest.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
