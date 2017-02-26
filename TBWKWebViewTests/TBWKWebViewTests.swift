@@ -13,10 +13,12 @@ import WebKit
 class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
     var webView: TBWKWebView!
     var ex: XCTestExpectation!
+    var counter = 0
 
     override func setUp() {
         super.setUp()
 
+        self.counter = 0
         let pref = WKPreferences()
         pref.javaScriptCanOpenWindowsAutomatically = true
         let conf = WKWebViewConfiguration()
@@ -52,15 +54,18 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
         self.webView.navigationDelegate = self
         self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!))
         waitForExpectations(timeout: 10) { (error) in
+            XCTAssertEqual(2, self.counter)
             XCTAssertNil(error, "Error: \(error)")
         }
     }
     // Test that internally implemented delegate calls get forwarded to the external delegate
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.counter += 1
         self.ex.fulfill()
     }
     // Test that internally unimplemented delegate calls get forwarded to the external delegate
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        self.counter += 1
         decisionHandler(.allow)
     }
 
