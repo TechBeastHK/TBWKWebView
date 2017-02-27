@@ -86,6 +86,21 @@ class TBWKWebViewTests: XCTestCase, WKNavigationDelegate {
         }
     }
 
+    func testDequeue() {
+        self.ex = expectation(description: "")
+        self.webView.enqueue(URLRequest(url: URL(string: "https://www.google.com")!)) { (webView, navigation, error) in
+            DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+                self.webView.dequeue()
+            }
+            return .incomplete
+        };
+        self.webView.enqueue {
+            self.ex.fulfill()
+        }
+        waitForExpectations(timeout: 10) { (error) in
+            XCTAssertNil(error, "Error: \(error)")
+        }
+    }
 
     func testLocalFile() {
         self.ex = expectation(description: "")

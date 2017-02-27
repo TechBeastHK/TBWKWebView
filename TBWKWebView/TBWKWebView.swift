@@ -106,6 +106,11 @@ open class TBWKWebView: WKWebView {
         self.attemptFlush()
     }
 
+    open func dequeue() {
+        completionBlocks.removeFirst()
+        self.attemptFlush()
+    }
+
     private func attemptFlush() {
         guard completionBlocks.count > 0 else { return }
         if !self.isLoading && self.currentExecutingBlock == nil {
